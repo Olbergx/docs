@@ -237,6 +237,44 @@ $this->title = 'АИС Отчет';
                     
                     
                     
+                
+                
+                
+    <?php
+    
+    
+    
+    
+    $query = frontend\models\Data::find();
+
+$provider = new ActiveDataProvider([
+    'query' => $query,
+    'pagination' => [
+        'pageSize' => 10,
+    ],
+    'sort' => [
+        'defaultOrder' => [
+            'created_at' => SORT_DESC,
+            'title' => SORT_ASC, 
+        ]
+    ],
+]);
+    
+    
+
+    //$dataPost=ArrayHelper::map(\frontend\models\Data::find()->asArray()->all(), 'id', 'email');
+    echo $form->field(new \frontend\models\Data(), 'id')->dropDownList(
+    [],
+    [
+        'prompt' => 'Fəaliyyət sahəsini seçin',
+        'id' => 'emeliyyatlar'
+    ]
+);
+    ?>
+</div>
+                
+                
+                
                     
                     <?php
                     
