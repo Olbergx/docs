@@ -75,7 +75,7 @@ class SiteController extends Controller
         
         
         $model = new Data();
-        return $this->render('index', compact($model));
+        return $this->render('index', compact('model'));
     }
 
     /**

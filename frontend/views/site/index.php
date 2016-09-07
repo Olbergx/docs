@@ -5,6 +5,8 @@ use yii\bootstrap\Tabs;
 use yii\bootstrap\Carousel;
 use yii\grid\GridView;
 use yii\data\ActiveDataProvider;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 $this->title = 'АИС Отчет';
 ?>
@@ -240,37 +242,22 @@ $this->title = 'АИС Отчет';
                 
                 
                 
-    <?php
-    
-    
-    
-    
-    $query = frontend\models\Data::find();
+   <?php
+    $form = ActiveForm::begin();
 
-$provider = new ActiveDataProvider([
-    'query' => $query,
-    'pagination' => [
-        'pageSize' => 10,
-    ],
-    'sort' => [
-        'defaultOrder' => [
-            'created_at' => SORT_DESC,
-            'title' => SORT_ASC, 
-        ]
-    ],
-]);
-    
-    
+// получаем всех авторов
+    $data = frontend\models\Data::find()->all();
+// формируем массив, с ключем равным полю 'id' и значением равным полю 'name' 
+    $items = ArrayHelper::map($data,'id','inn');
+    $params = [
+        'prompt' => 'Укажите записи'
+    ];
+    echo $form->field($model, 'data')->dropDownList($items,$params);
 
-    //$dataPost=ArrayHelper::map(\frontend\models\Data::find()->asArray()->all(), 'id', 'email');
-    echo $form->field(new \frontend\models\Data(), 'id')->dropDownList(
-    [],
-    [
-        'prompt' => 'Fəaliyyət sahəsini seçin',
-        'id' => 'emeliyyatlar'
-    ]
-);
-    ?>
+    ActiveForm::end();
+?>
+                
+                
 </div>
                 
                 
